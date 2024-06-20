@@ -21,6 +21,7 @@ search_text_img/
 └── extract_features.py    #特征提取
 └── search.py              #特征比对
 └── web.py                 #gradio UI界面
+└── assets                 # 界面图像展示
 └── README.md
 └── requirements.txt
 └── models        #目录主要方便保存模型,若没有模型,会自动下载存放在该路径
@@ -29,12 +30,34 @@ search_text_img/
     ├── photo_ids.csv      #底库特征数据id落盘
 ```
 
-## 运行代码
+## 修改/运行代码
+### 修改代码
+- search.py文件修改数据所在路径(和你本地保持一致),如下所示, 底库数据路径和模型路径: [底库数据和特征](https://pan.baidu.com/s/1St1Py5nLLxTjcWvU787f2A?pwd=urwv), 提取码: urwv。数据解压缩即可, 无需将多个文件夹内的图像放在一个文件夹内。
+- 模型freatures.npy,photo_ids.csv下载后放在features文件夹内, 如上述工作目录所示。
+```python
+def display_pic(photos, file_list, top_k, top_p):
+    path = r'/Users/songyanan/MUGE/'
+
+    photos_path = Path(path)
+    # print(os.listdir(path))
+    # photos_files = list(photos_path.glob("**/*.jpg"))
+```
+
+### 运行代码
+- 运行web.py 即可跳转到web界面,默认ip:http://0.0.0.0:8089
+
 ```
 python web.py
 ```
+
 ## 界面展示
 * 运行代码后,访问
+
+<div align="center">
+    <img src="assets/text_img.png" alt="文搜图"  />
+    <img src="assets/img_img.png" alt="图搜图"  />
+</div>
+
 
 ## 注意事项
 * web界面上提供了多种模型的选择,不同模型对应的特征纬度不同。但是底库数据(MUGE)目前是使用vit-B-16模型提取特征的, 因此界面上检索只支持vit-B-16模型。 
