@@ -12,13 +12,13 @@ import torch
 from torchvision.utils import make_grid
 from torchvision.io import read_image
 from matplotlib import pyplot as plt
+from torchvision.transforms import Normalize
 
 features_path = Path("features").absolute()
 # Load the features and the corresponding IDs
 photo_features = np.load(features_path / "features.npy")
 photo_ids = pd.read_csv(features_path / "photo_ids.csv")
 photo_ids = list(photo_ids['photo_id'])
-
 
 # search_query = "小学生在排队"
 def search_(search_query, top_k, models, top_p, search_text=False, search_img=False):
@@ -52,15 +52,25 @@ def search_(search_query, top_k, models, top_p, search_text=False, search_img=Fa
 
 
 def display_pic(photos, file_list, top_k, top_p):
+    path = r'/Users/songyanan/MUGE/'
+
+    photos_path = Path(path)
+    # print(os.listdir(path))
+    # photos_files = list(photos_path.glob("**/*.jpg"))
+
+
     for i in range(top_k):
         # Retrieve the photo ID
         idx = photos[i][0]
         sim = photos[i][1]
         if sim >= top_p:
             photo_id = photo_ids[idx]
-            file_list.append(os.path.join('images', 'gallery', photo_id + '.jpg'))
+            img_name = photo_id + '.jpg'
+            img_path = str(list(photos_path.glob("**/" + img_name))[0])
+            # file_list.append(os.path.join('images', 'gallery', photo_id + '.jpg'))
+            file_list.append(img_path)
         else:
-            return
+            break
 
 
 def convert_tensor(file_list):
