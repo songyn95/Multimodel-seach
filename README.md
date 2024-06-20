@@ -51,7 +51,7 @@ python web.py
 ```
 
 ## 界面展示
-* 运行代码后,访问
+* 进入到界面后,即可进行搜索,界面如下所示。
 
 <div align="center">
     <img src="assets/text_img.png" alt="文搜图"  />
